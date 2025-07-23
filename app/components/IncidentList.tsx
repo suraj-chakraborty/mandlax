@@ -28,18 +28,18 @@ export default function IncidentList() {
         onMutate: async (id) => {
             await qc.cancelQueries(['incidents', false]);
             const prev = qc.getQueryData(['incidents', false]);
-            qc.setQueryData(['incidents', false], (old: any[]) =>
+            qc.setQueryData(['incidents', false], (old: unknown[]) =>
                 old.filter((i) => i.id !== id)
             );
             return { prev };
         },
-        onError: (_, __, context: any) =>
+        onError: (_, __, context: unknown) =>
             qc.setQueryData(['incidents', false], context.prev),
         onSettled: () => qc.invalidateQueries(['incidents', false]),
     });
     const testType = (type: string) => {
         if (type === "GUN_THREAT") {
-            return <Image src={gun} alt="gun" />
+            return <Image src={gun} alt="gun" width="auto" />
         } else if (type === "UNAUTHORISED_ACCESS") {
             return <Image src={unauth} alt="unauthorized" />
         } else {
@@ -61,7 +61,7 @@ export default function IncidentList() {
                 data.length < 0 ? (
                     <div>no incident found </div>
                 ) : (
-                    data?.map((inc: any) => (
+                    data?.map((inc: never) => (
                         // console.log(inc)
                         <li
                             key={inc.id}

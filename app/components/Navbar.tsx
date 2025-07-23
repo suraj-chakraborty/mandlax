@@ -20,14 +20,14 @@ const Navbar = () => {
             <div className="flex flex-row gap-4 justify-between align-middle items-center content-center" >
                 <Link className='flex flex-row gap-1' href="">
                     <span className='content-center'>
-                        <Image src={dashboard} alt="dashboard" width={20} height={20} />
+                        <Image src={dashboard} alt="dashboard" />
                     </span>
                     <span>Dashboard</span>
                 </Link>
-                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={camera} alt="cam" width={30} height={30} /></span> <span>Cameras</span></Link>
-                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={scenes} alt="cam" width={30} height={30} /></span><span>Screens</span></Link>
-                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={incidents} alt="cam" width={30} height={30} /></span><span>Incidents</span></Link>
-                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={users} alt="cam" width={30} height={30} /></span><span>Users</span></Link>
+                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={camera} alt="cam" /></span> <span>Cameras</span></Link>
+                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={scenes} alt="cam" /></span><span>Screens</span></Link>
+                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={incidents} alt="cam" /></span><span>Incidents</span></Link>
+                <Link className='flex flex-row gap-1' href=""><span className='content-center'><Image src={users} alt="cam" /></span><span>Users</span></Link>
             </div>
             <div className="flex flex-row align-middle items-center">
                 <div className="flex align-middle items-center pr-3">
@@ -36,7 +36,7 @@ const Navbar = () => {
                 <div className="flex flex-col gap-0">
                     <span><b>Mohammed Ajhas</b></span>
                     <span>ajhas@mandlac.com</span></div>
-                <Image src={arrow} alt="logo image" width={20} height={20} />
+                <Image src={arrow} alt="logo image" />
             </div>
         </div>
     )
