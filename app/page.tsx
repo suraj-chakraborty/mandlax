@@ -8,7 +8,7 @@ export default function Home() {
     <Providers>
       <Navbar />
       <div className=" w-full flex flex-row md:flex-row sm:flex-col items-start justify-between gap-2 px-4 py-8 bg-gray-900 text-white">
-        <div className="w-3/5">
+        <div className="w-3/5 pr-3">
           <IncidentPlayer />
 
         </div>

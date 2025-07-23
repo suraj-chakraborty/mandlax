@@ -7,6 +7,8 @@ enum IncidentType {
     FACE_RECOGNISED = 'FACE_RECOGNISED',
 }
 
+
+
 async function main() {
     const cams = await prisma.camera.createMany({
         data: [
@@ -26,13 +28,20 @@ async function main() {
             IncidentType.GUN_THREAT,
             IncidentType.FACE_RECOGNISED,
         ];
+
+        const data: Record<string, string> = {
+            data1: "https://raw.githubusercontent.com/suraj-chakraborty/mandlax/refs/heads/master/thumb/1.jpg",
+            data2: "https://raw.githubusercontent.com/suraj-chakraborty/mandlax/refs/heads/master/thumb/2.jpg",
+            data3: "https://raw.githubusercontent.com/suraj-chakraborty/mandlax/refs/heads/master/thumb/3.jpg"
+        }
+        const key = `data${(i % 3) + 1}`
         return {
             cameraId: `c${(i % 3) + 1}`,
             type: types[i % 3],
             tsStart: start,
             tsEnd: end,
-            thumbnailUrl: `/thumb/${(i % 3) + 1}.jpg`,
-            resolved: i % 4 === 0, // 3 out of 12 resolved
+            thumbnailUrl: data[key],
+            resolved: i % 4 === 0,
         };
     });
 

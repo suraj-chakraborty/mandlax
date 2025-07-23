@@ -6,8 +6,9 @@ import axios from 'axios';
 import incIcon from "@/app/assets/incicon.png"
 import gun from "@/app/assets/gun.png"
 import unauth from "@/app/assets/unauthorized.png"
+import camera from "@/app/assets/cctv.png"
 import Image from 'next/image';
-import { CheckCheck, DoorOpen, FrownIcon, GuitarIcon, Plus, UserSearch } from 'lucide-react';
+import { CheckCheck, ChevronRight, DoorOpen, Plus, UserSearch } from 'lucide-react';
 
 
 export default function IncidentList() {
@@ -42,20 +43,12 @@ export default function IncidentList() {
         } else if (type === "UNAUTHORISED_ACCESS") {
             return <Image src={unauth} alt="unauthorized" />
         } else {
-            return <UserSearch />
+            return <UserSearch size={16} />
         }
     }
 
-    // const counter = (data, check) => {
-    //     if (!data) {
-    //         return 0
-    //     }
-    //     const num = data.filter((inc: any) => inc.resolved === check).length
-    //     return num
-    // }
-
     return (
-        <ul className="space-y-3 bg-gray-800">
+        <ul className="space-y-2 bg-gray-800">
             <div className="flex flex-row justify-between items-center p-2">
                 <div className="flex flex-row"><Image src={incIcon} alt="incidents" /><h2>{data?.length || 0} Unresolved incidents</h2></div>
                 <div className="flex flex-row justify-center align-middle content-center"><span className='flex flex-row pr-1 align-middle items-center'><DoorOpen size={16} /><Plus size={16} /><UserSearch size={16} /></span><h4 className='flex flex-row p-1 rounded-xl bg-[#0B0B0B] items-center pt-2'  ><CheckCheck size={14} />{resolvedData?.length || 0} resolved incidents</h4></div>
@@ -72,21 +65,21 @@ export default function IncidentList() {
                         // console.log(inc)
                         <li
                             key={inc.id}
-                            className="flex gap-3 p-2 rounded-lg bg-gray-800 items-center"
+                            className="flex gap-3 p-1 rounded-lg bg-gray-800 items-center"
                         >
-                            <Image src={inc.thumbnailUrl} width={100} height={100} alt="camera" className="w-12 h-12 rounded-lg" />
+                            <Image src={inc.thumbnailUrl} width={100} height={100} alt="camera" className="w-26 h-full rounded-lg" />
                             <div className="flex-1">
-                                <p className="font-semibold text-sm flex flex-row pt-2 pb-2">{testType(inc.type)}{inc.type.replace('_', ' ')}</p>
-                                <p className="text-xs text-gray-400">{inc.camera.location}</p>
+                                <p className="font-semibold text-sm flex flex-row pt-2 pb-2 gap-1.5">{testType(inc.type)}  {inc.type.replace('_', ' ')}</p>
+                                <p className="text-xs text-gray-400 flex flex-row gap-1"><Image src={camera} alt="camera" width={20} height={20} />{inc.camera.location}</p>
                                 <p className="text-xs text-gray-500">
                                     {new Date(inc.tsStart).toLocaleTimeString()}
                                 </p>
                             </div>
                             <button
                                 onClick={() => resolve.mutate(inc.id)}
-                                className="text-xs px-2 py-1 bg-blue-600 rounded hover:bg-blue-500"
+                                className="text-xs px-2 py-1 text-amber-300 rounded hover:bg-amber-300 hover:text-amber-800 font-bold flex flex-row gap-1 align-middle justify-center "
                             >
-                                Resolve
+                                Resolve <ChevronRight size={14} />
                             </button>
                         </li>
                     ))
