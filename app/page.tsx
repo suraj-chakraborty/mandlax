@@ -8,7 +8,7 @@ import Timeline from "./components/Timeline";
 export default function Home() {
   return (
     <Providers>
-      <div className="max-h-screen bg-[#131313] overflow-hidden flex flex-col">
+      <div className="max-h-screen  bg-[#131313] overflow-hidden flex flex-col">
         <Navbar />
         <div className="w-full flex h-[57vh] flex-row md:flex-row sm:flex-col xs:flex-col items-start justify-between gap-2 px-4 py-2 bg-[#131313] text-white">
           <div className="flex w-[50vw] h-full rounded">
@@ -18,7 +18,7 @@ export default function Home() {
             <IncidentList />
           </div>
         </div>
-        <div className="w-full absolute bottom-0 scrollbar-hide">
+        <div className="w-full absolute bottom-4 scrollbar-hide">
           <Timeline />
         </div>
       </div>

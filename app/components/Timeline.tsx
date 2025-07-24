@@ -63,9 +63,9 @@ export default function Timeline() {
     };
 
     return (
-        <div className="text-white pl-6 pr-6 pt-2 rounded-xl w-full max-w-full mx-auto space-y-4 shadow-lg">
-            <div className="flex w-full bg-[#131313] items-center justify-between gap-2 p-2 rounded">
-                <div className="flex items-center gap-2">
+        <div className="text-white pt-2 rounded-xl w-full max-w-full mx-auto space-y-4 shadow-lg">
+            <div className="flex w-full bg-[#131313] items-center justify-between gap-2 p-2 pr-7 rounded">
+                <div className="flex items-center gap-2 pl-7">
                     <button className="bg-white/10 p-2 rounded-full hover:bg-white/20" aria-label="Skip Backwards">
                         <SkipBack className="w-5 h-5" />
                     </button>
@@ -94,7 +94,7 @@ export default function Timeline() {
                         style={{ left: `${playheadPercent}%` }}
                     />
 
-                    <div className="flex border-b border-white/10 z-10 relative bg-[#0c0c0c]">
+                    <div className="flex border-b pl-6 pr-6 border-white/10 z-10 relative bg-[#0c0c0c]">
                         <h1 className="font-bold flex align-middle justify-center text-center" >Camera List</h1>
                         <div className="w-32" />
                         {[...Array(12)].map((_, i) => (
@@ -108,7 +108,7 @@ export default function Timeline() {
                         const cameraEvents = events.filter((e) => e.camera === camera);
 
                         return (
-                            <div key={camera} className={`flex border-b border-white/10 h-8 relative`}>
+                            <div key={camera} className={`flex border-b border-white/10 h-8 relative pl-6 pr-6`}>
                                 <div className="w-32 text-sm text-white/80 flex items-center">{camera}</div>
                                 <div className="flex-1 relative">
                                     {cameraEvents.map((event, idx2) => {
