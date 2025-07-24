@@ -55,7 +55,7 @@ export default function Timeline() {
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
         };
-    }, []);
+    });
 
     const timeToMinutes = (time: string) => {
         const [, minutes] = time.split(":").map(Number);
@@ -104,11 +104,11 @@ export default function Timeline() {
                         ))}
                     </div>
 
-                    {cameras.map((camera, idx) => {
+                    {cameras.map((camera, i) => {
                         const cameraEvents = events.filter((e) => e.camera === camera);
 
                         return (
-                            <div key={camera} className={`flex border-b border-white/10 h-8 relative pl-6 pr-6`}>
+                            <div key={i} className={`flex border-b border-white/10 h-8 relative pl-6 pr-6`}>
                                 <div className="w-32 text-sm text-white/80 flex items-center">{camera}</div>
                                 <div className="flex-1 relative">
                                     {cameraEvents.map((event, idx2) => {

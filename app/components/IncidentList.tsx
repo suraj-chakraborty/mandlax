@@ -18,12 +18,10 @@ export default function IncidentList() {
         queryFn: () => axios.get('/api/incidents?resolved=false').then(r => r.data),
     });
     console.log("Data", data)
-    const { data: resolvedData,
-        isLoading,
-        isError } = useQuery({
-            queryKey: ['incidents', true],
-            queryFn: () => axios.get('/api/incidents?resolved=true').then(r => r.data),
-        });
+    const { data: resolvedData } = useQuery({
+        queryKey: ['incidents', true],
+        queryFn: () => axios.get('/api/incidents?resolved=true').then(r => r.data),
+    });
     console.log("resolvedData", resolvedData)
 
     const resolve = useMutation({
