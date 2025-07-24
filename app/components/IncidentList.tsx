@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -33,24 +31,39 @@ export default function IncidentList() {
         queryFn: () => axios.get(`${BASE_URL}/api/incidents?resolved=true`).then(r => r.data),
     });
     // console.log("resolvedData", resolvedData)
-
+    const incidentsQueryKey = ['incidents', false] as const;
     const resolve = useMutation({
-        mutationFn: (id: string) => axios.patch(`${BASE_URL}/api/incidents/${id}/resolve`),
-        onMutate: async (id) => {
-            await qc.cancelQueries(['incidents', false]);
-            const prev = qc.getQueryData(['incidents', false]);
-            qc.setQueryData(['incidents', false], (old: unknown[]) =>
-                old.filter((i) => i.id !== id)
-            );
-            return { prev };
+        mutationFn: async (id: string) => {
+            return await axios.patch(`${BASE_URL}/api/incidents/${id}/resolve`);
         },
-        onError: (_, __, context: unknown) =>
-            qc.setQueryData(['incidents', false], context.prev),
-        onSettled: () => qc.invalidateQueries(['incidents', false]),
+
+        onMutate: async (id: string) => {
+            await qc.cancelQueries({ queryKey: incidentsQueryKey });
+
+            const previousData = qc.getQueryData<Incident[]>(['incidents', false]);
+
+            // Optimistically update cache
+            qc.setQueryData<Incident[]>(['incidents', false], (old = []) =>
+                old.filter((incident) => incident.id !== id)
+            );
+
+            return { previousData };
+        },
+
+        onError: (_error, _id, context) => {
+            if (context?.previousData) {
+                qc.setQueryData(['incidents', false], context.previousData);
+            }
+        },
+
+        onSettled: () => {
+            qc.invalidateQueries({ queryKey: incidentsQueryKey });
+        },
     });
+
     const testType = (type: string) => {
         if (type === "GUN_THREAT") {
-            return <Image src={gun} alt="gun" width="auto" />
+            return <Image src={gun} alt="gun" />
         } else if (type === "UNAUTHORISED_ACCESS") {
             return <Image src={unauth} alt="unauthorized" />
         } else {

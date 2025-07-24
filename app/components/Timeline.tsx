@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, Clock4 } from "lucide-react";
 

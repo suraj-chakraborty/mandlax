@@ -18,6 +18,7 @@ export default function IncidentPlayer() {
                     className="flex rounded-2xl !w-full !h-full"
                 />
             </div>
+
             <div className="absolute bottom-4 right-4 flex gap-3 z-20 bg-black p-3 mb-4 rounded-xl backdrop-blur-md shadow-lg">
                 {[2, 3].map(i => (
                     <div key={i} className="flex flex-col items-center gap-1">

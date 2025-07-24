@@ -1,4 +1,4 @@
-'use server'
+'use server';
 import { prisma } from '@/app/lib/PrismaClient';
 import { NextRequest, NextResponse } from 'next/server';
 
