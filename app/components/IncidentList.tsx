@@ -24,17 +24,17 @@ export default function IncidentList() {
     const qc = useQueryClient();
     const { data } = useQuery({
         queryKey: ['incidents', false],
-        queryFn: () => axios.get('/api/incidents?resolved=false').then(r => r.data),
+        queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/incidents?resolved=false`).then(r => r.data),
     });
     console.log("Data", data)
     const { data: resolvedData } = useQuery({
         queryKey: ['incidents', true],
-        queryFn: () => axios.get('/api/incidents?resolved=true').then(r => r.data),
+        queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/incidents?resolved=true`).then(r => r.data),
     });
     console.log("resolvedData", resolvedData)
 
     const resolve = useMutation({
-        mutationFn: (id: string) => axios.patch(`/api/incidents/${id}/resolve`),
+        mutationFn: (id: string) => axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/incidents/${id}/resolve`),
         onMutate: async (id) => {
             await qc.cancelQueries(['incidents', false]);
             const prev = qc.getQueryData(['incidents', false]);
