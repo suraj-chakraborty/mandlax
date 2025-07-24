@@ -41,6 +41,7 @@ Type Safety: Enforced across backend and database logic
 
 
 🧪 If I Had More Time
+
 📱 Add full mobile responsiveness
 
 🧼 Optimize query & component structure for performance
