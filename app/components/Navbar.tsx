@@ -33,7 +33,7 @@ const Navbar = () => {
                 <div className="flex align-middle items-center pr-3">
                     <Image src={avatar} alt="logo image" />
                 </div>
-                <div className="flex flex-col gap-0">
+                <div className="flex flex-col gap-0 cursor-pointer">
                     <span><b>Mohammed Ajhas</b></span>
                     <span>ajhas@mandlac.com</span></div>
                 <Image src={arrow} alt="logo image" />

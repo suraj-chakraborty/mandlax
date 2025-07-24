@@ -10,7 +10,7 @@ enum IncidentType {
 
 
 async function main() {
-    const cams = await prisma.camera.createMany({
+    await prisma.camera.createMany({
         data: [
             { id: 'c1', name: 'Shop Floor A', location: 'Ground Level' },
             { id: 'c2', name: 'Vault', location: 'Basement' },

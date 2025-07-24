@@ -4,9 +4,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 
 export async function GET(req: NextRequest) {
-    const resolved = req.nextUrl.searchParams.get('resolved') === 'true';
+    const resolved = req.nextUrl.searchParams.get('resolved');
+    const filter = resolved !== null
+        ? { resolved: resolved === "true" }
+        : { resolved: resolved === "false" };
     const incidents = await prisma.incident.findMany({
-        where: { resolved },
+        where: filter,
         include: { camera: true },
         orderBy: { tsStart: 'desc' },
     });

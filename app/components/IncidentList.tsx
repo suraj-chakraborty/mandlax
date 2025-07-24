@@ -17,14 +17,17 @@ export default function IncidentList() {
         queryKey: ['incidents', false],
         queryFn: () => axios.get('/api/incidents?resolved=false').then(r => r.data),
     });
-    const { resolvedData } = useQuery({
-        queryKey: ['incidents', true],
-        queryFn: () => axios.get('/api/incidents?resolved=true').then(r => r.data),
-    });
+    console.log("Data", data)
+    const { data: resolvedData,
+        isLoading,
+        isError } = useQuery({
+            queryKey: ['incidents', true],
+            queryFn: () => axios.get('/api/incidents?resolved=true').then(r => r.data),
+        });
     console.log("resolvedData", resolvedData)
 
     const resolve = useMutation({
-        mutationFn: (id: string) => axios.patch(`/api/incidents/${id}/resolve`),
+        mutationFn: (id: string) => axios.put(`/api/incidents/${id}/resolve`),
         onMutate: async (id) => {
             await qc.cancelQueries(['incidents', false]);
             const prev = qc.getQueryData(['incidents', false]);
@@ -48,24 +51,24 @@ export default function IncidentList() {
     }
 
     return (
-        <ul className="space-y-2 bg-gray-800">
-            <div className="flex flex-row justify-between items-center p-2">
-                <div className="flex flex-row"><Image src={incIcon} alt="incidents" /><h2>{data?.length || 0} Unresolved incidents</h2></div>
-                <div className="flex flex-row justify-center align-middle content-center"><span className='flex flex-row pr-1 align-middle items-center'><DoorOpen size={16} /><Plus size={16} /><UserSearch size={16} /></span><h4 className='flex flex-row p-1 rounded-xl bg-[#0B0B0B] items-center pt-2'  ><CheckCheck size={14} />{resolvedData?.length || 0} resolved incidents</h4></div>
+        <ul className="space-y-2 bg-[#131313] overflow-y-scroll scrollbar-hide rounded-xl aspect-[14/7]">
+            <div className=" sticky top-0 z-10 bg-black flex flex-row justify-between items-center p-2">
+                <div className="flex flex-row gap-2"><Image src={incIcon} alt="incidents" /><h2>{data?.length || 0} Unresolved incidents</h2></div>
+                <div className="flex flex-row justify-center align-middle content-center"><span className='flex flex-row pr-1 align-middle items-center'><DoorOpen size={16} /><Plus size={16} /><UserSearch size={16} /></span><h4 className='flex flex-row p-2 rounded-2xl bg-[#0B0B0B] items-center pt-2 '  ><CheckCheck size={14} />{resolvedData?.length || 0} resolved incidents</h4></div>
             </div>
             {!data ? (<div>
                 <div className="flex flex-col items-center justify-center py-8">
                     <span className="text-gray-400">Loading incidents...</span>
                 </div>
             </div>) : (
-                data.length < 0 ? (
+                data.length <= 0 ? (
                     <div>no incident found </div>
                 ) : (
                     data?.map((inc: never) => (
                         // console.log(inc)
                         <li
                             key={inc.id}
-                            className="flex gap-3 p-1 rounded-lg bg-gray-800 items-center"
+                            className="flex gap-3 p-1 rounded-lg bg-[#131313] items-center"
                         >
                             <Image src={inc.thumbnailUrl} width={100} height={100} alt="camera" className="w-26 h-full rounded-lg" />
                             <div className="flex-1">
