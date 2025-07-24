@@ -8,11 +8,16 @@ export async function GET(req: NextRequest) {
     const filter = resolved !== null
         ? { resolved: resolved === "true" }
         : { resolved: resolved === "false" };
-    const incidents = await prisma.incident.findMany({
-        where: filter,
-        include: { camera: true },
-        orderBy: { tsStart: 'desc' },
-    });
-    console.log(resolved)
-    return NextResponse.json(incidents);
+    try {
+        const incidents = await prisma.incident.findMany({
+            where: filter,
+            include: { camera: true },
+            orderBy: { tsStart: 'desc' },
+        });
+
+        return NextResponse.json(incidents);
+    } catch (error) {
+        console.error('Failed to fetch incidents:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
 }

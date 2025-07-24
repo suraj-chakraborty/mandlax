@@ -6,7 +6,7 @@ export default function IncidentPlayer() {
 
     return (
         <div className="relative w-full max-w-3xl mx-auto pb-10 ">
-            <div className="rounded-2xl overflow-visible mb-5 aspect-[14/6.6]">
+            <div className="rounded-2xl overflow-visible mb-5 aspect-[14/7]">
                 <ReactPlayer
                     src="https://www.youtube.com/watch?v=6BIFnvjpquk"
                     controls={false}
