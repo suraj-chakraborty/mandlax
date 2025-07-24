@@ -18,7 +18,7 @@ export default function Home() {
             <IncidentList />
           </div>
         </div>
-        <div className="w-full absolute bottom-4 scrollbar-hide">
+        <div className="w-full bg-[#121313] absolute bottom-4 scrollbar-hide">
           <Timeline />
         </div>
       </div>

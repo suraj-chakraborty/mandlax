@@ -64,7 +64,7 @@ export default function Timeline() {
 
     return (
         <div className="text-white pt-2 rounded-xl w-full max-w-full mx-auto space-y-4 shadow-lg">
-            <div className="flex w-full bg-[#131313] items-center justify-between gap-2 p-2 pr-7 rounded">
+            <div className="flex w-full bg-black items-center justify-between gap-2 p-2 pr-7 rounded">
                 <div className="flex items-center gap-2 pl-7">
                     <button className="bg-white/10 p-2 rounded-full hover:bg-white/20" aria-label="Skip Backwards">
                         <SkipBack className="w-5 h-5" />

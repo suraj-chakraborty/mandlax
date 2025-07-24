@@ -5,8 +5,8 @@ import ReactPlayer from "react-player";
 export default function IncidentPlayer() {
 
     return (
-        <div className="relative w-full max-w-3xl mx-auto pb-10">
-            <div className="rounded-xl overflow-hidden mb-5 aspect-[14/6.6]">
+        <div className="relative w-full max-w-3xl mx-auto pb-10 ">
+            <div className="rounded-2xl overflow-visible mb-5 aspect-[14/6.6]">
                 <ReactPlayer
                     src="https://www.youtube.com/watch?v=6BIFnvjpquk"
                     controls={false}
@@ -15,10 +15,10 @@ export default function IncidentPlayer() {
                     loop={false}
                     width="100%"
                     height="100%"
-                    className="!w-full !h-full"
+                    className="flex rounded-2xl !w-full !h-full"
                 />
             </div>
-            <div className="absolute bottom-4 right-4 flex gap-3 z-20 bg-black/60 p-3 rounded-xl backdrop-blur-md shadow-lg">
+            <div className="absolute bottom-4 right-4 flex gap-3 z-20 bg-black p-3 mb-4 rounded-xl backdrop-blur-md shadow-lg">
                 {[2, 3].map(i => (
                     <div key={i} className="flex flex-col items-center gap-1">
                         <p className="text-white text-xs">Camera - 0{i}</p>

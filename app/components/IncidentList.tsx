@@ -10,6 +10,15 @@ import camera from "@/app/assets/cctv.png"
 import Image from 'next/image';
 import { CheckCheck, ChevronRight, DoorOpen, Plus, UserSearch } from 'lucide-react';
 
+type Incident = {
+    id: string;
+    type: string;
+    camera: {
+        location: string;
+    };
+    thumbnailUrl: string;
+    tsStart: string;
+};
 
 export default function IncidentList() {
     const qc = useQueryClient();
@@ -25,7 +34,7 @@ export default function IncidentList() {
     console.log("resolvedData", resolvedData)
 
     const resolve = useMutation({
-        mutationFn: (id: string) => axios.put(`/api/incidents/${id}/resolve`),
+        mutationFn: (id: string) => axios.patch(`/api/incidents/${id}/resolve`),
         onMutate: async (id) => {
             await qc.cancelQueries(['incidents', false]);
             const prev = qc.getQueryData(['incidents', false]);
@@ -60,9 +69,9 @@ export default function IncidentList() {
                 </div>
             </div>) : (
                 data.length <= 0 ? (
-                    <div>no incident found </div>
+                    <div className='flex justify-center align-middle' ><p>no incident found </p></div>
                 ) : (
-                    data?.map((inc: never) => (
+                    data?.map((inc: Incident) => (
                         // console.log(inc)
                         <li
                             key={inc.id}
